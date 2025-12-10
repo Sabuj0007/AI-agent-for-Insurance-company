@@ -1,0 +1,14 @@
+streamlit
+python-dotenv
+langchain-huggingface
+langchain-qdrant
+langchain-groq
+langchain-classic
+langchain-core
+qdrant-client
+sentence-transformers
+transformers
+accelerate
+uvicorn
+torch
+faiss-cpu
