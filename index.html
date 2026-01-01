@@ -2,226 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <script src="https://unpkg.com/@studio-freight/lenis/dist/lenis.min.js"></script>
-  <title>Q&A Chatbot for Insurance policy</title>
+  <title>Motor Insurance Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Theme toggle -->
-  <button id="theme-toggle" class="theme-toggle" type="button">
-    🌙 Dark mode
-  </button>
+<header class="app-header">
+  <h1>Motor Insurance Assistant</h1>
+  <p>Your trusted guide for motor insurance coverage, claims & policies</p>
+</header>
 
-  <div class="page-shell">
+<div class="app-layout">
 
-    <!-- CHAT + SIDEBAR SECTION (now visible by default) -->
-    <section id="chat-section" class="chat-section show-chat">
-      <div class="chat-layout">
+  <!-- FAQ SIDEBAR -->
+  <aside class="sidebar">
+    <div class="faq-wrapper collapsed" id="faq-wrapper">
 
-        <!-- LEFT SIDEBAR -->
-        <aside class="sidebar">
+      <div class="faq-header" id="faq-toggle">
+        <span>Frequently Asked Questions</span>
+        <span class="faq-arrow">▸</span>
+      </div>
 
-          <!-- FAQ PANEL -->
-          <section class="faq-panel">
-            <h4>Frequently asked questions</h4>
-            <p class="faq-subtitle">Tap a question to ask it instantly.</p>
+      <div class="faq-panel">
+        <div id="faq-list"></div>
+      </div>
 
-            <button class="faq-item"
-              data-question="What are the types of motor insurance cover?">
-              Types of Motor Insurance cover
-            </button>
+    </div>
+  </aside>
 
-            <button class="faq-item"
-              data-question="How can I file a claim for my motor insurance policy?">
-              How do I file a claim?
-            </button>
+  <!-- CHAT -->
+  <main class="chat-container">
 
-            <button class="faq-item"
-              data-question="what is covered in policy?">
-              What is covered in policy?
-            </button>
-
-            <button class="faq-item"
-              data-question="What is the toll-free number and email for customer support?">
-              Toll-free number & email
-            </button>
-
-            <button class="faq-item"
-              data-question="How can I check the status of my claim?">
-              Check claim status
-            </button>
-
-            <button class="faq-item"
-              data-question="What is the period of the policy?">
-              Policy period
-            </button>
-          </section>
-
-          <!-- COVERAGE CARD -->
-          <section class="info-card info-card-coverage">
-            <h4>Coverage at a glance</h4>
-            <ul class="info-list">
-              <li>Fire, explosion, theft</li>
-              <li>Flood, cyclone, storm</li>
-              <li>Accidental external damage</li>
-              <li>Riot, strike, terrorism</li>
-              <li>Damage during transit</li>
-            </ul>
-            <p class="info-note">
-              Based on standard package policy coverage in the Motor Insurance handbook.
-            </p>
-          </section>
-
-          <!-- EXCLUSIONS & HELP -->
-          <section class="info-card">
-            <h4>Important exclusions</h4>
-            <ul class="info-list">
-              <li>Driving without valid licence</li>
-              <li>Under influence of alcohol/drugs</li>
-              <li>Mechanical or electrical breakdown</li>
-              <li>Use beyond stated geographical limits</li>
-              <li>Use for unlawful purposes</li>
-            </ul>
-
-            <div class="info-divider"></div>
-
-            <h4>Help & grievances</h4>
-            <p class="info-text">For unresolved complaints, you can contact IRDAI:</p>
-
-            <ul class="info-list compact">
-              <li>
-                <strong>Toll-free:</strong>
-                <a class="info-link" href="tel:155255">155255</a>
-              </li>
-              <li>
-                <strong>Email:</strong>
-                <a class="info-link" href="mailto:complaints@irda.gov.in">complaints@irda.gov.in</a>
-              </li>
-              <li>
-                <strong>Portal:</strong>
-                <a class="info-link" href="https://www.igms.irda.gov.in" target="_blank">www.igms.irda.gov.in</a>
-              </li>
-            </ul>
-
-            <button id="view-tat" class="link-button">
-              📅 View service timelines
-            </button>
-          </section>
-
-        </aside>
-
-        <!-- RIGHT CHAT PANEL -->
-        <div class="chat-panel">
-          <header class="chat-header">
-            <div>
-              <h3>Q&A Chatbot for Insurance policy</h3>
-              <p>Ask questions based on our Motor Insurance policy.</p>
-            </div>
-
-            <div class="chat-header-right">
-              <button id="claim-help" class="secondary-btn">
-                📝 Claim help
-              </button>
-
-              <div class="status-pill">
-                <span class="status-dot"></span>
-                <span>Online</span>
-              </div>
-            </div>
-          </header>
-
-          <!-- Topic Chips -->
-          <div class="topic-chips">
-            <button class="topic-chip"
-              data-question="Explain the types of motor insurance cover and which one I should choose.">
-              Coverage
-            </button>
-
-            <button class="topic-chip"
-              data-question="How is the motor insurance premium determined?">
-              Premium
-            </button>
-
-            <button class="topic-chip"
-              data-question="What is Insured Declared Value (IDV) in motor insurance?">
-              IDV
-            </button>
-
-            <button class="topic-chip"
-              data-question="What is No Claim Bonus and how does it work?">
-              NCB
-            </button>
-
-            <button class="topic-chip"
-              data-question="What documents are required to file a motor insurance claim?">
-              Documents
-            </button>
-          </div>
-
-          <!-- Messages -->
-          <div id="messages" class="messages" tabindex="0" aria-live="polite">
-            <div class="message bot">
-              Hi! Ask me anything about your motor insurance policy.
-            </div>
-          </div>
-
-          <!-- Input -->
-          <form id="question-form" class="question-form">
-            <input
-              id="question-input"
-              type="text"
-              placeholder="Type your question..."
-              autocomplete="off"
-            />
-            <button type="submit" id="ask-button">Ask</button>
-          </form>
-
+    <div id="messages" class="chat-messages">
+      <div class="message bot">
+        <div class="bubble">
+          <strong>Hello!</strong><br>
+          I’m your Motor Insurance Assistant.<br>
+          Ask me anything about your motor insurance.
         </div>
       </div>
-
-      <footer class="chat-footer">
-        Powered by Groq & Qdrant
-      </footer>
-    </section>
-
-  </div>
-
-  <!-- Floating Buttons -->
-  <button id="fab-start-chat" class="fab fab-chat" title="Start chat">💬</button>
-
-  <!-- TAT Modal -->
-  <div id="tat-modal" class="modal-overlay" aria-hidden="true">
-    <div class="modal">
-      <div class="modal-header">
-        <h3>Policyholder service timelines</h3>
-        <button id="tat-close" class="modal-close">✕</button>
-      </div>
-
-      <p class="modal-text">
-        Key turnaround times for common services as per the Motor Insurance handbook:
-      </p>
-
-      <table class="tat-table">
-        <thead>
-          <tr><th>Service</th><th>Max. time</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Processing proposal / issuing policy</td><td>30 days</td></tr>
-          <tr><td>Non-claim service requests</td><td>10 days</td></tr>
-          <tr><td>Maturity / survival benefit</td><td>15 days</td></tr>
-          <tr><td>Death claim (no investigation)</td><td>30 days</td></tr>
-          <tr><td>Death claim (with investigation)</td><td>6 months</td></tr>
-          <tr><td>Survey report submission</td><td>30 days</td></tr>
-        </tbody>
-      </table>
-
-      <p class="modal-note">
-        Actual timelines may vary by insurer; please refer to your policy details.
-      </p>
     </div>
-  </div>
 
-  <script src="app.js"></script>
+    <form id="question-form" class="chat-input">
+      <input
+        id="question-input"
+        type="text"
+        placeholder="Ask a question about motor insurance..."
+        autocomplete="off"
+      />
+      <button type="submit">Ask</button>
+    </form>
+
+  </main>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
+
